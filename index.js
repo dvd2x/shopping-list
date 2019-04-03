@@ -77,22 +77,25 @@ function handleItemCheckClicked() {
     renderShoppingList();
   });
 }
-// ******************************* //
+
+function deleteListItem(itemId) {
+  console.log("Delete property for item with id " + itemId);
+  /* */
+  const itemDelete = STORE.findIndex(item => item.id === itemId);
+  STORE.splice(itemDelete, 1);
+  //why do i need an id when i am dealing with only 1 item 1 button
+}
 
 function handleDeleteItemClicked() {
   $(".js-shopping-list").on("click", `.js-item-delete`, event => {
     console.log("`handleDeleteItemClicked` ran");
-    const id = getItemIdFromElement(event.currentTarget);
-    toggleCheckedForListItem(id);
+    const idDelete = getItemIdFromElement(event.currentTarget);
+    deleteListItem(idDelete);
+    //STORE.shift();
     renderShoppingList();
   });
 }
 
-function deleteForListItem(itemId) {
-  console.log("Delete property for item with id " + `${itemId}`);
-}
-
-// *********************************** //
 // this function will be our callback when the page loads. it's responsible for
 // initially rendering the shopping list, and activating our individual functions
 // that handle new item submission and user clicks on the "check" and "delete" buttons
@@ -106,3 +109,22 @@ function handleShoppingList() {
 
 // when the page loads, call `handleShoppingList`
 $(handleShoppingList);
+
+/*
+ASK HOW CAN I USE THIS INSTEAD OF THE ANSWER THAT I GOT FOR DELETE
+function deleteListItem(itemId) {
+  console.log("Toggling checked property for item with id " + itemId);
+  const item = STORE.find(item => item.id === itemId);
+  item.checked = !item.checked;
+}
+
+function handleDeleteItemClicked() {
+  $(".js-shopping-list").on("click", `.js-item-delete`, event => {
+    console.log("`handleDeleteItemClicked` ran");
+    $("ul")
+      .children()
+      .empty();
+      renderShoppingList
+  });
+}
+*/

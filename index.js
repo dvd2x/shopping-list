@@ -77,13 +77,22 @@ function handleItemCheckClicked() {
     renderShoppingList();
   });
 }
+// ******************************* //
 
 function handleDeleteItemClicked() {
-  // this function will be responsible for when users want to delete a shopping list
-  // item
-  console.log("`handleDeleteItemClicked` ran");
+  $(".js-shopping-list").on("click", `.js-item-delete`, event => {
+    console.log("`handleDeleteItemClicked` ran");
+    const id = getItemIdFromElement(event.currentTarget);
+    toggleCheckedForListItem(id);
+    renderShoppingList();
+  });
 }
 
+function deleteForListItem(itemId) {
+  console.log("Delete property for item with id " + `${itemId}`);
+}
+
+// *********************************** //
 // this function will be our callback when the page loads. it's responsible for
 // initially rendering the shopping list, and activating our individual functions
 // that handle new item submission and user clicks on the "check" and "delete" buttons
